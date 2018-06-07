@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -39,16 +39,58 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+		<!-- MYSQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- H2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<!-- FLYWAY -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+
+		<!-- LOMBOK -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- JAVA 8 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- CONVERTO TO DTO -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
