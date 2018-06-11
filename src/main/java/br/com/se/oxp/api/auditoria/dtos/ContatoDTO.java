@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.se.oxp.api.enums.Status;
 import br.com.se.oxp.api.enums.TipoContato;
 import lombok.AllArgsConstructor;
@@ -50,6 +52,18 @@ private Long id;
 	
 	private OperadoraDTO operadora;
 	
+	@JsonIgnore
 	private List<String> taggles;
+	
+	@JsonIgnore
+	public boolean isNovo() {
+		return id == null;
+	}
+
+	@JsonIgnore
+	public boolean isEdicao() {
+		return id != null;
+	}
+
 
 }

@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.se.oxp.api.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,5 +41,15 @@ public class OperadoraDTO {
 	@CNPJ(message="CNPJ Inválido")
 	@Column(name="cnpj")
 	private String cnpj;
+	
+	@JsonIgnore
+	public boolean isNovo() {
+		return id == null;
+	}
+
+	@JsonIgnore
+	public boolean isEdicao() {
+		return id != null;
+	}
 
 }

@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.se.oxp.api.enums.Status;
 import lombok.AllArgsConstructor;
@@ -47,5 +48,15 @@ public class UsuarioDTO {
 	private UsuarioDTO ultimoUsuario;
 	
 	private String nomeUltimoUsuario;
+	
+	@JsonIgnore
+	public boolean isNovo() {
+		return id == null;
+	}
+
+	@JsonIgnore
+	public boolean isEdicao() {
+		return id != null;
+	}
 
 }

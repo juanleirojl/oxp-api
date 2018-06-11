@@ -3,13 +3,12 @@ package br.com.se.oxp.api.auditoria.dtos;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
-import br.com.se.oxp.api.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,10 +29,6 @@ private Long id;
 	@NotBlank(message ="O Nome é de preenchimento obrigatório.")
 	private String nome;
 	
-	@Enumerated(EnumType.STRING)
-	@Builder.Default
-	private Status status = Status.A;
-	
 	@NotBlank(message ="O Apelido é de preenchimento obrigatório.")
 	private String apelido;
 	
@@ -43,10 +38,12 @@ private Long id;
 	@Column(name="cnpj")
 	private String cnpj;
 	
+	@JsonIgnore
 	public boolean isNovo() {
 		return id == null;
 	}
 
+	@JsonIgnore
 	public boolean isEdicao() {
 		return id != null;
 	}
