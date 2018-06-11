@@ -129,7 +129,7 @@ public class OperadoraResource {
 	 */
 	private OperadoraDTO convertToDTO(Operadora operadora) {
 		OperadoraDTO operadoraDTO = modelMap.map(operadora, OperadoraDTO.class);
-		operadoraDTO.contatos.forEach(c -> c.setOperadora(null));
+		if(operadoraDTO.getContatos() != null) operadoraDTO.contatos.forEach(c -> c.setOperadora(null));
 		return operadoraDTO;
 	}
 	

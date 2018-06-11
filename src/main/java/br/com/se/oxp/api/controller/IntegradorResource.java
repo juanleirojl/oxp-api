@@ -129,7 +129,7 @@ public class IntegradorResource {
 	 */
 	private IntegradorDTO convertToDTO(Integrador integrador) {
 		IntegradorDTO integradorDTO = modelMap.map(integrador, IntegradorDTO.class);
-		integradorDTO.contatos.forEach(c -> c.setIntegrador(null));
+		if (integradorDTO.getContatos() !=null ) integradorDTO.contatos.forEach(c -> c.setIntegrador(null));
 		return integradorDTO;
 	}
 	
