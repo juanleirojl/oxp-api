@@ -11,24 +11,20 @@ spring:
       use-new-id-generator-mappings: true
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
         use_sql_comments: false
-        format_sql: false
+        format_sql: true
     
   
   datasource:
     url: jdbc:mysql://localhost/oxp-api?createDatabaseIfNotExist=true&useSSL=false
     username: root
     password: root
-    
-  jackson:
-    deserialization:
-      fail-on-unknown-properties: true
 
 
   flyway:
-    enabled: true
+    enabled: false
     locations: classpath:db/migration/mysql

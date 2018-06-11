@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public interface BaseService<T> {
 	
 	/**
@@ -15,6 +17,7 @@ public interface BaseService<T> {
 	 * @param pageRequest
 	 * @return Page<T>
 	 */
+	@Transactional(readOnly = true)
 	Page<T> findAllPaginado(PageRequest pageRequest);
 	
 	
@@ -22,6 +25,7 @@ public interface BaseService<T> {
 	 *  Retorna uma lista de <T>
 	 * @return Set<T>
 	 */
+	@Transactional(readOnly = true)
 	List<T> findAll();
 	
 	
@@ -30,6 +34,7 @@ public interface BaseService<T> {
 	 * @param id
 	 * @return Optional<T>
 	 */
+	@Transactional(readOnly = true)
 	Optional<T> findById(Long id);
 	
 	/**

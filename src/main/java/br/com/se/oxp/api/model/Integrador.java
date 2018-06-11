@@ -1,24 +1,20 @@
 package br.com.se.oxp.api.model;
 
-import static javax.persistence.EnumType.STRING;
-
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import br.com.se.oxp.api.auditoria.Audit;
 import br.com.se.oxp.api.auditoria.Auditable;
-import br.com.se.oxp.api.enums.Status;
 import br.com.se.oxp.api.enums.TelaCadastro;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,39 +22,38 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@SuppressWarnings("serial")
 @Data
+@EqualsAndHashCode(callSuper=false,exclude={"contatos"})
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false,exclude={"grupos"})
 @Builder
 @Entity
-@Table(name="usuario")
-public class Usuario extends Auditable implements Audit{
-	
+public class Integrador extends Auditable implements Audit{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotBlank
 	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="login")
-	private String login;
+	@Column(name="apelido")
+	private String apelido;
 	
-	@Builder.Default
-	@Enumerated(STRING)
-	private Status status = Status.A;
+	@CNPJ(message="CNPJ Inválido")
+	@Column(name="cnpj")
+	private String cnpj;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id")
-		, inverseJoinColumns = @JoinColumn(name = "grupo_id"))
-	private Set<Grupo> grupos;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="integrador")
+	public Set<Contato> contatos;
 	
 	@Override
 	public TelaCadastro getTela() {
-		return TelaCadastro.USUARIO;
+		return TelaCadastro.INTEGRADOR;
 	}
 
 }

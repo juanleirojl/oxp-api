@@ -1,0 +1,54 @@
+package br.com.se.oxp.api.auditoria.dtos;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.br.CNPJ;
+
+import br.com.se.oxp.api.enums.Status;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper=false,exclude={"contatos"})
+@Builder
+public class IntegradorDTO {
+	
+private Long id;
+	
+	@NotBlank(message ="O Nome é de preenchimento obrigatório.")
+	private String nome;
+	
+	@Enumerated(EnumType.STRING)
+	@Builder.Default
+	private Status status = Status.A;
+	
+	@NotBlank(message ="O Apelido é de preenchimento obrigatório.")
+	private String apelido;
+	
+	public List<ContatoDTO> contatos;
+	
+	@CNPJ(message="CNPJ Inválido")
+	@Column(name="cnpj")
+	private String cnpj;
+	
+	public boolean isNovo() {
+		return id == null;
+	}
+
+	public boolean isEdicao() {
+		return id != null;
+	}
+
+}
